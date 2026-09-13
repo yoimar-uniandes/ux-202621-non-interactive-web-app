@@ -1,0 +1,52 @@
+:root {
+  /* Palette: mockups/Paleta de colores.pdf is the source of truth. */
+  --color-primary-50: #fff7f3;
+  --color-primary-100: #ffe3d8;
+  --color-primary-300: #ffb398;
+  --color-primary-500: #ff6117;
+  --color-primary-700: #d8430b;
+  --color-primary-900: #7a2100;
+  --color-secondary-50: #f2f3ff;
+  --color-secondary-100: #dee1ff;
+  --color-secondary-300: #929ae0;
+  --color-secondary-500: #343c98;
+  --color-secondary-700: #000449;
+  --color-secondary-900: #000222;
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f4f7fa;
+  --color-neutral-300: #cfdee9;
+  --color-neutral-500: #7b8794;
+  --color-neutral-700: #3d4957;
+  --color-neutral-900: #17202a;
+  --color-info-100: #e3f2fd;
+  --color-success-100: #d8ffe3;
+  --color-warning-100: #fff0c2;
+  --color-error-500: #ff3e40;
+
+  --surface-canvas: var(--color-neutral-100);
+  --surface-default: #ffffff;
+  --surface-subtle: var(--color-secondary-50);
+  --surface-inverse: var(--color-secondary-700);
+  --text-primary: var(--color-secondary-700);
+  --text-secondary: var(--color-neutral-700);
+  --text-inverse: #ffffff;
+  --text-on-primary: var(--color-secondary-900);
+  --action-primary: var(--color-primary-500);
+  --action-primary-hover: var(--color-primary-700);
+  --action-destructive: var(--color-error-500);
+  --border-default: var(--color-neutral-300);
+  --border-focus: var(--color-secondary-500);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --shadow-fab: 0 0.5rem 1.5rem rgb(23 32 42 / 18%);
+}
