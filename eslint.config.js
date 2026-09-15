@@ -10,10 +10,22 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   ...vue.configs['flat/recommended'],
   {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+        extraFileExtensions: ['.vue'],
+      },
+    },
+  },
+  {
     rules: {
       'vue/multi-word-component-names': 'off',
       'vue/html-indent': ['error', 2],
       'vue/singleline-html-element-content-newline': 'off',
+      'vue/max-attributes-per-line': 'off',
+      'vue/html-closing-bracket-newline': 'off',
+      'vue/html-self-closing': 'off',
     },
   },
 )
