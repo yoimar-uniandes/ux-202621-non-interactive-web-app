@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 
 import AppButton from '@/components/AppButton.vue'
 import AppSidebar from '@/components/AppSidebar.vue'
+import EmptyGroupState from '@/features/group/components/EmptyGroupState.vue'
 import MemberCard from '@/features/group/components/MemberCard.vue'
 import { useGroupMembers } from '@/features/group/composables/useGroupMembers'
 
@@ -26,29 +27,33 @@ function openDeleteMember(memberId: string): void {
               Administra a cada uno de los miembros de tu grupo.
             </p>
           </div>
-          <AppButton class="w-[200px]">Agregar miembro</AppButton>
+          <AppButton v-if="members.length > 0" class="w-[200px]">Agregar miembro</AppButton>
         </header>
 
-        <section
-          class="mt-12 flex min-h-[52px] items-center justify-between gap-8 rounded bg-[var(--surface-inverse)] px-6 py-4 text-sm leading-5 text-white"
-          aria-label="Facturas sin responsable"
-        >
-          <p>{{ unassignedBillCount }} facturas del grupo no tienen responsable.</p>
-          <button type="button" class="min-h-5 font-medium underline underline-offset-2">
-            Ver facturas sin responsable
-          </button>
-        </section>
+        <template v-if="members.length > 0">
+          <section
+            class="mt-12 flex min-h-[52px] items-center justify-between gap-8 rounded bg-[var(--surface-inverse)] px-6 py-4 text-sm leading-5 text-white"
+            aria-label="Facturas sin responsable"
+          >
+            <p>{{ unassignedBillCount }} facturas del grupo no tienen responsable.</p>
+            <button type="button" class="min-h-5 font-medium underline underline-offset-2">
+              Ver facturas sin responsable
+            </button>
+          </section>
 
-        <section class="mt-12 grid grid-cols-2 gap-6" aria-label="Miembros del grupo">
-          <MemberCard
-            v-for="member in members"
-            :id="member.id"
-            :key="member.name"
-            :name="member.name"
-            :summary="member.summary"
-            @delete="openDeleteMember"
-          />
-        </section>
+          <section class="mt-12 grid grid-cols-2 gap-6" aria-label="Miembros del grupo">
+            <MemberCard
+              v-for="member in members"
+              :id="member.id"
+              :key="member.name"
+              :name="member.name"
+              :summary="member.summary"
+              @delete="openDeleteMember"
+            />
+          </section>
+        </template>
+
+        <EmptyGroupState v-else class="mt-12" />
       </div>
     </main>
   </div>
