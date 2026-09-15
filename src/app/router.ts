@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import GroupView from '@/features/group/views/GroupView.vue'
+import DeleteMemberView from '@/features/group/views/DeleteMemberView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,12 @@ const router = createRouter({
       name: 'group',
       component: GroupView,
       meta: { title: 'Grupo' },
+    },
+    {
+      path: '/grupo/:memberId/eliminar',
+      name: 'group-member-delete',
+      component: DeleteMemberView,
+      meta: { title: 'Eliminar miembro' },
     },
   ],
 })

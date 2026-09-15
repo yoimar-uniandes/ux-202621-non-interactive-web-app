@@ -37,7 +37,7 @@ const primaryItems = [
     </div>
 
     <div class="mt-auto">
-      <div class="sidebar__separator mb-6" />
+      <div class="sidebar__separator mb-4" />
       <button type="button" class="nav-item">
         <img src="/icons/settings.svg" alt="" width="24" height="24" aria-hidden="true" />
         <span>Ajustes</span>
@@ -86,7 +86,7 @@ const primaryItems = [
   background: var(--border-default);
 }
 .sidebar__separator--brand {
-  margin-top: 8px;
+  margin-top: 24px;
 }
 .sidebar__navigation {
   margin-top: 24px;
@@ -104,7 +104,7 @@ const primaryItems = [
   padding: 12px;
   color: var(--text-secondary);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 20px;
   text-align: left;
   cursor: pointer;

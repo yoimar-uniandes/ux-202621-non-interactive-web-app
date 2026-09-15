@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import AppButton from '@/components/AppButton.vue'
-defineProps<{ name: string; summary: string }>()
+
+defineProps<{ id: string; name: string; summary: string }>()
+const emit = defineEmits<{ delete: [id: string] }>()
 </script>
 
 <template>
@@ -14,6 +16,7 @@ defineProps<{ name: string; summary: string }>()
       ><button
         type="button"
         class="h-12 text-sm font-normal leading-5 text-[var(--text-destructive)] underline underline-offset-2"
+        @click="emit('delete', id)"
       >
         Eliminar
       </button>
