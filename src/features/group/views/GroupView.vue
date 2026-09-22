@@ -8,7 +8,7 @@ import MemberCard from '@/features/group/components/MemberCard.vue'
 import { useGroupMembers } from '@/features/group/composables/useGroupMembers'
 
 const router = useRouter()
-const { members, unassignedBillCount } = useGroupMembers()
+const { members, unassignedBillCount, recentlyAddedMember } = useGroupMembers()
 
 function openDeleteMember(memberId: string): void {
   void router.push({ name: 'group-member-delete', params: { memberId } })
@@ -40,6 +40,21 @@ function openInviteMember(): void {
           </AppButton>
         </header>
 
+        <section
+          v-if="recentlyAddedMember"
+          class="mt-6 flex min-h-[40px] w-full items-center justify-between gap-8 rounded border border-[var(--color-neutral-300)] bg-[var(--color-info-100)] px-5 py-3 text-sm leading-5 text-[var(--color-neutral-700)]"
+          aria-label="Miembro agregado"
+        >
+          <p>{{ recentlyAddedMember.name }} se agregó al grupo. Todavía no tiene facturas asignadas.</p>
+          <button
+            type="button"
+            class="font-medium text-[var(--color-neutral-700)] underline underline-offset-2"
+            @click="openAssignBills(recentlyAddedMember.id)"
+          >
+            Asignar facturas
+          </button>
+        </section>
+
         <template v-if="members.length > 0">
           <section
             class="mt-12 flex min-h-[52px] items-center justify-between gap-8 rounded bg-[var(--surface-inverse)] px-6 py-4 text-sm leading-5 text-white"
@@ -58,6 +73,7 @@ function openInviteMember(): void {
               :key="member.name"
               :name="member.name"
               :summary="member.summary"
+              :highlighted="member.id === 'camila'"
               @assign="openAssignBills"
               @delete="openDeleteMember"
             />

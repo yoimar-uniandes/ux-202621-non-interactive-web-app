@@ -1,4 +1,4 @@
-import { computed, reactive, readonly } from 'vue'
+import { computed, reactive, readonly, ref } from 'vue'
 
 import type { GroupMember, GroupState } from '@/features/group/models/member'
 
@@ -93,6 +93,7 @@ function loadState(): GroupState {
 }
 
 const state = reactive<GroupState>(loadState())
+const recentlyAddedMemberId = ref<string | null>(null)
 
 function persistState(): void {
   try {
@@ -120,9 +121,30 @@ export function useGroupMembers() {
     return true
   }
 
+  function addMember(name: string): boolean {
+    const id = 'camila'
+    if (state.members.some((member) => member.id === id)) return false
+
+    state.members.push({
+      id,
+      name,
+      summary: 'Sin facturas asignadas',
+      bills: [],
+    })
+    recentlyAddedMemberId.value = id
+    persistState()
+    return true
+  }
+
+  const recentlyAddedMember = computed(() =>
+    state.members.find((member) => member.id === recentlyAddedMemberId.value),
+  )
+
   return {
     members: readonly(members),
     unassignedBillCount: readonly(unassignedBillCount),
+    recentlyAddedMember: readonly(recentlyAddedMember),
+    addMember,
     findMember,
     deleteMember,
   }

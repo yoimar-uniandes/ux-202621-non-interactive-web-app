@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppButton from '@/components/AppButton.vue'
 
-defineProps<{ id: string; name: string; summary: string }>()
+defineProps<{ id: string; name: string; summary: string; highlighted?: boolean }>()
 const emit = defineEmits<{
   assign: [id: string]
   delete: [id: string]
@@ -11,6 +11,7 @@ const emit = defineEmits<{
 <template>
   <article
     class="flex h-[172px] flex-col rounded-xl border border-[var(--border-default)] bg-white p-6"
+    :class="highlighted && '!border-[var(--color-primary-100)] !bg-[var(--color-primary-50)]'"
   >
     <h2 class="text-base font-medium leading-6">{{ name }}</h2>
     <p class="mt-2 text-sm leading-5 text-[var(--text-secondary)]">{{ summary }}</p>

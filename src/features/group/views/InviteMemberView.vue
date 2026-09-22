@@ -4,11 +4,18 @@ import { useRouter } from 'vue-router'
 
 import AppButton from '@/components/AppButton.vue'
 import AppSidebar from '@/components/AppSidebar.vue'
+import { useGroupMembers } from '@/features/group/composables/useGroupMembers'
 
 const router = useRouter()
 const accountId = ref('')
+const { addMember } = useGroupMembers()
 
 function returnToGroup(): void {
+  void router.push({ name: 'group' })
+}
+
+function inviteMember(): void {
+  addMember('Camila')
   void router.push({ name: 'group' })
 }
 </script>
@@ -33,7 +40,7 @@ function returnToGroup(): void {
           </p>
         </header>
 
-        <form class="mt-12" @submit.prevent="returnToGroup">
+        <form class="mt-12" @submit.prevent="inviteMember">
           <label for="account-id" class="block text-sm font-medium leading-5">Identificador de cuenta</label>
           <input
             id="account-id"
