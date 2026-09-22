@@ -79,3 +79,14 @@ src/
 ├── features/  # flujos por dominio
 └── components/ # componentes reutilizables
 ```
+
+## Organización de vistas
+
+Las seis pantallas web del alcance están implementadas mediante cuatro vistas de ruta:
+
+- `GroupView.vue`: vistas 1 (grupo con miembros), 3 (grupo sin miembros) y 6 (miembro recién agregado).
+- `DeleteMemberView.vue`: vista 2, eliminación de un miembro.
+- `AssignBillsView.vue`: vista 4, asignación o retiro de facturas.
+- `InviteMemberView.vue`: vista 5, invitación de un miembro.
+
+Las vistas 3 y 6 son estados del mismo panel de grupo, no rutas independientes. `EmptyGroupState.vue` representa el estado vacío y el estado reactivo del grupo representa la incorporación del nuevo miembro.
