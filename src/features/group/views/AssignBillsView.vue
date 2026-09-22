@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import AppButton from '@/components/AppButton.vue'
@@ -8,21 +8,43 @@ import { useGroupMembers } from '@/features/group/composables/useGroupMembers'
 
 const route = useRoute()
 const router = useRouter()
-const { findMember } = useGroupMembers()
+const { billsForAssignment, findMember, updateMemberBillAssignments } = useGroupMembers()
 
 const memberId = computed(() => String(route.params.memberId ?? ''))
 const member = computed(() => findMember(memberId.value))
 
-const availableBills = [
-  { id: 'epm', name: 'EPM', detail: 'Vence mañana', assignee: 'Sin responsable', tone: 'warning', checked: true },
-  { id: 'internet', name: 'Internet', detail: 'Factura al día', assignee: 'A cargo de Daniel', tone: 'success', checked: false },
-  { id: 'carro', name: 'Cuota carro', detail: 'Vence en 12 días', assignee: 'A cargo de Rafael', tone: 'default', checked: true },
-  { id: 'arriendo', name: 'Arriendo', detail: 'Vence en 20 días', assignee: 'Sin responsable', tone: 'default', checked: false },
-]
+const selectedBillIds = ref<string[]>([])
+const availableBills = computed(() =>
+  billsForAssignment.value.map((bill) => ({
+    ...bill,
+    detail: bill.status,
+    assignee: bill.assignee ? `A cargo de ${bill.assignee.name}` : 'Sin responsable',
+    tone: bill.status === 'Vence mañana' ? 'warning' : bill.status === 'Factura al día' ? 'success' : 'default',
+  })),
+)
 
 function returnToGroup(): void {
   void router.push({ name: 'group' })
 }
+
+function updateAssignments(): void {
+  if (!member.value) return
+
+  updateMemberBillAssignments(member.value.id, selectedBillIds.value)
+  returnToGroup()
+}
+
+watch(
+  member,
+  (currentMember) => {
+    selectedBillIds.value = currentMember
+      ? currentMember.bills
+          .filter((bill) => availableBills.value.some((availableBill) => availableBill.id === bill.id))
+          .map((bill) => bill.id)
+      : []
+  },
+  { immediate: true },
+)
 
 onMounted(() => {
   if (!member.value) void router.replace({ name: 'group' })
@@ -67,7 +89,8 @@ onMounted(() => {
             >
               <input
                 :id="bill.id"
-                :checked="bill.checked"
+                v-model="selectedBillIds"
+                :value="bill.id"
                 type="checkbox"
                 class="bill-checkbox h-5 w-5"
               />
@@ -91,7 +114,7 @@ onMounted(() => {
           <AppButton
             variant="primary"
             class="w-[200px] rounded-full border border-[var(--action-primary)] !text-[var(--color-secondary-500)]"
-            @click="returnToGroup"
+            @click="updateAssignments"
           >
             Actualizar
           </AppButton>
