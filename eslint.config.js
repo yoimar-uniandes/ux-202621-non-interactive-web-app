@@ -21,7 +21,9 @@ export default tseslint.config(
   {
     rules: {
       'vue/multi-word-component-names': 'off',
-      'vue/html-indent': ['error', 2],
+      // Prettier is the single source of formatting for Vue templates.
+      'vue/html-indent': 'off',
+      'vue/multiline-html-element-content-newline': 'off',
       'vue/singleline-html-element-content-newline': 'off',
       'vue/max-attributes-per-line': 'off',
       'vue/html-closing-bracket-newline': 'off',

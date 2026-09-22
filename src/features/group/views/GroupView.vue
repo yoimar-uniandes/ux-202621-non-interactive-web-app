@@ -45,7 +45,9 @@ function openInviteMember(): void {
           class="mt-6 flex min-h-[40px] w-full items-center justify-between gap-8 rounded border border-[var(--color-neutral-300)] bg-[var(--color-info-100)] px-5 py-3 text-sm leading-5 text-[var(--color-neutral-700)]"
           aria-label="Miembro agregado"
         >
-          <p>{{ recentlyAddedMember.name }} se agregó al grupo. Todavía no tiene facturas asignadas.</p>
+          <p>
+            {{ recentlyAddedMember.name }} se agregó al grupo. Todavía no tiene facturas asignadas.
+          </p>
           <button
             type="button"
             class="font-medium text-[var(--color-neutral-700)] underline underline-offset-2"

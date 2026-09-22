@@ -5,7 +5,11 @@ import type { GroupMember, GroupState } from '@/features/group/models/member'
 // Bump the persisted schema so an empty exploratory state from the prior
 // prototype always starts this revision with the mockup's populated group.
 const STORAGE_KEY = 'fakto.group-state.v4'
-const LEGACY_STORAGE_KEYS = ['fakto.group-state.v1', 'fakto.group-state.v2', 'fakto.group-state.v3'] as const
+const LEGACY_STORAGE_KEYS = [
+  'fakto.group-state.v1',
+  'fakto.group-state.v2',
+  'fakto.group-state.v3',
+] as const
 
 const assignableBills = [
   { id: 'epm', name: 'EPM', status: 'Vence mañana' },
@@ -116,7 +120,9 @@ function formatMemberSummary(bills: GroupMember['bills']): string {
   if (bills.length === 0) return 'Sin facturas asignadas'
 
   const billLabel = `${bills.length} factura${bills.length === 1 ? '' : 's'} asignada${bills.length === 1 ? '' : 's'}`
-  const expiringBillCount = bills.filter((bill) => bill.status === 'Vence mañana' || bill.status === 'Por vencer').length
+  const expiringBillCount = bills.filter(
+    (bill) => bill.status === 'Vence mañana' || bill.status === 'Por vencer',
+  ).length
   const expiringLabel =
     expiringBillCount === 0 ? 'Ninguna por vencer' : `${expiringBillCount} por vencer`
 
@@ -129,7 +135,9 @@ export function useGroupMembers() {
   const billsForAssignment = computed(() =>
     assignableBills.map((bill) => ({
       ...bill,
-      assignee: state.members.find((member) => member.bills.some((memberBill) => memberBill.id === bill.id)),
+      assignee: state.members.find((member) =>
+        member.bills.some((memberBill) => memberBill.id === bill.id),
+      ),
     })),
   )
 
@@ -175,7 +183,9 @@ export function useGroupMembers() {
 
       if (isSelected && currentAssignee?.id !== memberId) {
         if (currentAssignee) {
-          currentAssignee.bills = currentAssignee.bills.filter((candidateBill) => candidateBill.id !== bill.id)
+          currentAssignee.bills = currentAssignee.bills.filter(
+            (candidateBill) => candidateBill.id !== bill.id,
+          )
           currentAssignee.summary = formatMemberSummary(currentAssignee.bills)
         } else {
           state.unassignedBillCount = Math.max(0, state.unassignedBillCount - 1)
