@@ -17,6 +17,10 @@ function openDeleteMember(memberId: string): void {
 function openAssignBills(memberId: string): void {
   void router.push({ name: 'group-member-assign', params: { memberId } })
 }
+
+function openInviteMember(): void {
+  void router.push({ name: 'group-member-invite' })
+}
 </script>
 
 <template>
@@ -31,7 +35,9 @@ function openAssignBills(memberId: string): void {
               Administra a cada uno de los miembros de tu grupo.
             </p>
           </div>
-          <AppButton v-if="members.length > 0" class="w-[200px]">Agregar miembro</AppButton>
+          <AppButton v-if="members.length > 0" class="w-[200px]" @click="openInviteMember">
+            Agregar miembro
+          </AppButton>
         </header>
 
         <template v-if="members.length > 0">

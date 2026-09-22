@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+
 import AppButton from '@/components/AppButton.vue'
+
+const router = useRouter()
+
+function openInviteMember(): void {
+  void router.push({ name: 'group-member-invite' })
+}
 </script>
 
 <template>
@@ -16,6 +24,6 @@ import AppButton from '@/components/AppButton.vue'
         facturas y saber quién responde por cada una.
       </p>
     </div>
-    <AppButton class="w-[200px]">Agregar miembro</AppButton>
+    <AppButton class="w-[200px]" @click="openInviteMember">Agregar miembro</AppButton>
   </section>
 </template>
