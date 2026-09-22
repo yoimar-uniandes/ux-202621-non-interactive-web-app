@@ -19,7 +19,12 @@ const availableBills = computed(() =>
     ...bill,
     detail: bill.status,
     assignee: bill.assignee ? `A cargo de ${bill.assignee.name}` : 'Sin responsable',
-    tone: bill.status === 'Vence mañana' ? 'warning' : bill.status === 'Factura al día' ? 'success' : 'default',
+    tone:
+      bill.status === 'Vence mañana'
+        ? 'warning'
+        : bill.status === 'Factura al día'
+          ? 'success'
+          : 'default',
   })),
 )
 
@@ -39,7 +44,9 @@ watch(
   (currentMember) => {
     selectedBillIds.value = currentMember
       ? currentMember.bills
-          .filter((bill) => availableBills.value.some((availableBill) => availableBill.id === bill.id))
+          .filter((bill) =>
+            availableBills.value.some((availableBill) => availableBill.id === bill.id),
+          )
           .map((bill) => bill.id)
       : []
   },
@@ -72,7 +79,9 @@ onMounted(() => {
           </p>
         </header>
 
-        <section class="mt-12 overflow-hidden rounded border border-[var(--border-default)] bg-white">
+        <section
+          class="mt-12 overflow-hidden rounded border border-[var(--border-default)] bg-white"
+        >
           <h2 class="sr-only">Facturas disponibles</h2>
           <ul class="m-0 flex list-none flex-col p-0" aria-label="Facturas disponibles">
             <li
@@ -94,14 +103,31 @@ onMounted(() => {
                 type="checkbox"
                 class="bill-checkbox h-5 w-5"
               />
-              <label :for="bill.id" class="flex flex-1 cursor-pointer items-center justify-between gap-4">
+              <label
+                :for="bill.id"
+                class="flex flex-1 cursor-pointer items-center justify-between gap-4"
+              >
                 <span>
                   <span class="block text-sm font-medium leading-5">{{ bill.name }}</span>
-                  <span class="mt-1 block text-sm leading-5" :class="bill.tone === 'warning' ? 'text-[var(--color-warning-900)]' : 'text-[var(--text-secondary)]'">
+                  <span
+                    class="mt-1 block text-sm leading-5"
+                    :class="
+                      bill.tone === 'warning'
+                        ? 'text-[var(--color-warning-900)]'
+                        : 'text-[var(--text-secondary)]'
+                    "
+                  >
                     {{ bill.detail }}
                   </span>
                 </span>
-                <span class="text-right text-sm leading-5" :class="bill.tone === 'warning' ? 'text-[var(--color-warning-900)]' : 'text-[var(--text-secondary)]'">
+                <span
+                  class="text-right text-sm leading-5"
+                  :class="
+                    bill.tone === 'warning'
+                      ? 'text-[var(--color-warning-900)]'
+                      : 'text-[var(--text-secondary)]'
+                  "
+                >
                   {{ bill.assignee }}
                 </span>
               </label>
@@ -142,3 +168,4 @@ onMounted(() => {
   background-size: 14px 14px;
 }
 </style>
+ 

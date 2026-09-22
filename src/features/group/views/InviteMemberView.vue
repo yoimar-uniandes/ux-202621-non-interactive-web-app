@@ -36,12 +36,15 @@ function inviteMember(): void {
         <header class="mt-6">
           <h1 class="text-[32px] font-medium leading-10">Invitar miembro al grupo</h1>
           <p class="mt-2 text-base leading-6 text-[var(--text-secondary)]">
-            Escribe el identificador de la cuenta que quieres sumar. Le enviaremos una invitación para que acepte.
+            Escribe el identificador de la cuenta que quieres sumar. Le enviaremos una invitación
+            para que acepte.
           </p>
         </header>
 
         <form class="mt-12" @submit.prevent="inviteMember">
-          <label for="account-id" class="block text-sm font-medium leading-5">Identificador de cuenta</label>
+          <label for="account-id" class="block text-sm font-medium leading-5"
+            >Identificador de cuenta</label
+          >
           <input
             id="account-id"
             v-model="accountId"
@@ -67,3 +70,4 @@ function inviteMember(): void {
     </main>
   </div>
 </template>
+ 
