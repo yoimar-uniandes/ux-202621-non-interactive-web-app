@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import GroupView from '@/features/group/views/GroupView.vue'
 import DeleteMemberView from '@/features/group/views/DeleteMemberView.vue'
+import AssignBillsView from '@/features/group/views/AssignBillsView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,6 +22,12 @@ const router = createRouter({
       name: 'group-member-delete',
       component: DeleteMemberView,
       meta: { title: 'Eliminar miembro' },
+    },
+    {
+      path: '/grupo/:memberId/asignar',
+      name: 'group-member-assign',
+      component: AssignBillsView,
+      meta: { title: 'Asignar facturas' },
     },
   ],
 })

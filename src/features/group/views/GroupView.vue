@@ -13,6 +13,10 @@ const { members, unassignedBillCount } = useGroupMembers()
 function openDeleteMember(memberId: string): void {
   void router.push({ name: 'group-member-delete', params: { memberId } })
 }
+
+function openAssignBills(memberId: string): void {
+  void router.push({ name: 'group-member-assign', params: { memberId } })
+}
 </script>
 
 <template>
@@ -48,6 +52,7 @@ function openDeleteMember(memberId: string): void {
               :key="member.name"
               :name="member.name"
               :summary="member.summary"
+              @assign="openAssignBills"
               @delete="openDeleteMember"
             />
           </section>

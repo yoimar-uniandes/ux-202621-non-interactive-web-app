@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+
+const route = useRoute()
+const isGroupSectionActive = computed(() => String(route.name ?? '').startsWith('group'))
+
 const primaryItems = [
   { label: 'Inicio', icon: '/icons/home.svg' },
   { label: 'Pagos', icon: '/icons/payments.svg' },
@@ -22,12 +28,16 @@ const primaryItems = [
       <nav class="sidebar__navigation">
         <ul class="m-0 flex list-none flex-col gap-2 p-0">
           <li v-for="item in primaryItems" :key="item.label">
-            <button
-              type="button"
+            <RouterLink
+              v-if="item.label === 'Grupo'"
+              :to="{ name: 'group' }"
               class="nav-item"
-              :class="item.label === 'Grupo' && 'nav-item--active'"
-              :aria-current="item.label === 'Grupo' ? 'page' : undefined"
+              :class="{ 'nav-item--active': isGroupSectionActive }"
             >
+              <img :src="item.icon" alt="" width="24" height="24" aria-hidden="true" />
+              <span>{{ item.label }}</span>
+            </RouterLink>
+            <button v-else type="button" class="nav-item">
               <img :src="item.icon" alt="" width="24" height="24" aria-hidden="true" />
               <span>{{ item.label }}</span>
             </button>
