@@ -1,5 +1,10 @@
 # Fakto Web
 
+[![Vue](https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vuedotjs&logoColor=white)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![Docker](https://img.shields.io/badge/Docker-supported-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+
 Aplicación Vue para la gestión visual de grupos y responsables de facturas compartidas. Es un prototipo no funcional: la navegación, formularios y validaciones viven en el cliente, sin backend.
 
 ## Requisitos
